@@ -3,7 +3,6 @@
 const config = require('../config.js');
 const fetch = require ('node-fetch')
 const app = require('../app.js')
-//import Product, { findById, find, findByIdAndUpdate } from './models/product.js.js';
 const Product = require('../models/product.js');
 
 

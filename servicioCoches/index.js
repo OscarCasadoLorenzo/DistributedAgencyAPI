@@ -1,18 +1,7 @@
 'use strict'
-/*
-import express from 'express';
-import { urlencoded, json } from 'body-parser';
-import { connect } from 'mongoose';
-import { getProducts } from './controlers/product.js';
-*/
-
-
 const mongoose = require('mongoose');
 const app = require('./app')
 const config = require('./config')
-
-
-
 
 mongoose.connect(config.db,(err,res)=>{
     useUnifiedTopology:true
