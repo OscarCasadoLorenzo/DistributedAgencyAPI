@@ -59,7 +59,7 @@ function getCoche(req,res){
 
 }
 
-//Introducir nuevo producto(app.post('/api/coches'))
+//Introducir nuevo producto(app.put('/api/coches'))
 function modificarCoche(req,res){
     const queId = req.params.cochesId;
 

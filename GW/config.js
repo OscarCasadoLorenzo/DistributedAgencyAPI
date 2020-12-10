@@ -8,6 +8,5 @@ module.exports= {
    
     URLWS_Coches: 'http://localhost:3100/api/coches',
 
-    usuariosDB: "mongodb+srv://ocl5:ocl5@api.ajmmk.mongodb.net/agenciaDB?retryWrites=true&w=majority"
-
+    URLWS_Auth: 'http://localhost:3400/api/auth',
 }

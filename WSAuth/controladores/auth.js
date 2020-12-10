@@ -2,25 +2,26 @@
 
 const mongoose  = require('mongoose')
 const Usuario   = require('../modelos/usuario')
-const servicios = require('../servicios/tokens')
+const Bcrypt        = require('bcrypt-nodejs')
+const { builtinModules } = require('module')
 
-//Registrarse
-function signUp (req, res){
-    const user = new User({
-        email : req.body.email;
-        /* La contraseña no es necesaria ya que la genera
-            mongoose a partir de los datos del usuario
-        */
-        nombre : req.body.nombre,
-        apellidos : req.body.apellidos,
-        telefono : req.body.telefono
-    })
+function saveUsuario(req,res){
+    console.log('Buenas')
+    var salt = Bcrypt.genSaltSync(10)
 
-    user.save((err) => {
-        if(err)
-            res.status(500).send({ mensaje : `Error al crear el usuario: ${err}`})
+    let hash = Bcrypt.hashSync(req.body.password, salt)
 
-        //Si todo es correcto llamaremos a un servicio que devuelva el token
-        return res.status(201).send({token: servicios.createToken(user)})
-    })
+    let usuario = new Usuario()
+    usuario.email = req.body.email
+
+    usuario.password = hash
+    usuario.apellidos = req.body.apellidos
+
+    usuario.save()
+
+    return res.status(201).send({message: 'Usuario creado con éxito'})
+}
+
+module.exports = {
+    saveUsuario
 }
