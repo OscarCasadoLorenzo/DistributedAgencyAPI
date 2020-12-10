@@ -39,10 +39,6 @@ function getProduct(req,res){
         }
 
         res.status(200).send({ product: product})//El segundo "product", es la variable, y el primero es la clave
-        
-        
-
-
     })
 }
 
@@ -50,15 +46,8 @@ function getProduct(req,res){
 //Introducir nuevo producto(app.post('/api/coches'))
 function saveProduct(req,res){
 
-
-
-
-    
-
     let product= new Product();
-
     
-
     product.modelo = req.body.modelo;
     product.matricula = req.body.matricula;
     product.price = req.body.price;

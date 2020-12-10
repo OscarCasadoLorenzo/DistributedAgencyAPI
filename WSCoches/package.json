@@ -12,7 +12,7 @@
     "Coches",
     "JavaScript"
   ],
-  "author": "Nicolas Ros Mateo",
+  "author": "Oscar Casado Lorenzo",
   "license": "MIT",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
