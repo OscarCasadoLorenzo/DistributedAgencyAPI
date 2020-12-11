@@ -3,7 +3,6 @@
 const config    = require('../config.js');
 const fetch     = require ('node-fetch')
 const app       = require('../app.js')
-const Product   = require('../modelos/coches.js');
 
 const URL = config.URLWS_Coches;
 
@@ -44,7 +43,7 @@ function getCoche(req,res){
     //const queColeccion = req.params.colecciones;
     console.log(URL);
 
-    fetch (URL)
+    fetch (`${URL}/${queId}`)
     .then(res => res.json() )
     .then( myjson =>{
         //Mi logica de Negocio
@@ -59,40 +58,34 @@ function getCoche(req,res){
 
 }
 
-//Introducir nuevo producto(app.put('/api/coches'))
-function modificarCoche(req,res){
+
+function alquilarCoche(req,res){
     const queId = req.params.cochesId;
-
-    const queColeccion = req.params.colecciones;
-    const nuevoElemento = req.body;
+    const nuevoEstado= req.body.disponible;
     
-    fetch (URL,  {
-                        method: 'PUT',
-                        body: JSON.stringify(nuevoElemento),//Convierte el nuevoElemento en texto para poder serializarlo
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authoritation':`Bearer${queToken}` 
-                            }//esto es lo que hace postman, pero lo tengo que hacer a mano
-
-                    })
+    fetch (`${URL}/${queId}`,  {
+        method: 'PUT',
+        body: JSON.stringify(nuevoEstado),//Convierte el nuevoElemento en texto para poder serializarlo
+    })
     .then(res => res.json() )
     .then( myjson =>{
         //Mi logica de Negocio
         res.json({
             result: 'Modificacion correcta',
             coleccion: queColeccion,
-            nuevoElemento: myjson.elemento
+            nuevoEstado: myjson.productUp
         });
     })
 
-    
-
+    //Confirmación a entidad bancaria
+    //if bien añadir transaccion fecth
+    //if mal volver a llamar fetch modificar disponible
 }
-//Actualizar los datos de un coche (app.put('/api/coches/:productId))
+
 
 
 module.exports = {
     getCoches,
     getCoche,
-    modificarCoche,
+    alquilarCoche,
 }

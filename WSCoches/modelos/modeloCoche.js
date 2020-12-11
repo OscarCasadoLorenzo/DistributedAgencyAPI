@@ -6,9 +6,7 @@ const Schema = mongoose.Schema;
 const ProductSchema= Schema({
     modelo: String,
     matricula: String,
-    price: {type: Number, default:0},
-    category: String,
-    description: String
+    disponible : {type: Boolean, default: true}
 
 });
 

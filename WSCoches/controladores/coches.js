@@ -57,17 +57,20 @@ function saveProduct(req,res){
 function updateProduct(req,res){
 
     let productId = req.params.productId;
-    let update = req.body;
+
+
+    var update = {
+        $set:{disponible : `${req.body.disponible}`}
+    };
 
     Product.findByIdAndUpdate( productId, update, (err, productoUp)=>{
         if(err) res.status(500).send({
             message: `Error al acrtualizar el producto ${err}`
         });
         
-        res.status(200).send({product:productoUp});
+        res.status(200).send({mess: 'Proceso terminado'});
 
     });
-
 }
 
 

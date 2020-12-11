@@ -19,7 +19,7 @@ api.put('/hotel/:habitacionId',hoteles.modificarHoteles);
 
 api.get('/coches',coches.getCoches);
 api.get('/coches/:cochesId',coches.getCoche); 
-api.put('/coches/:cochesId',coches.modificarCoche);
+api.put('/coches/:cochesId',coches.alquilarCoche);
 
 /*
 api.get('/aviones/',aviones.getVuelos);
