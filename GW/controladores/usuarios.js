@@ -15,7 +15,7 @@ function saveUsuario(req,res){
     const queURL = `${URL}/usuarios`;
     fetch (queURL,  {
                         method: 'POST',
-                        body: JSON.stringify(nuevoElemento),//Convierte el nuevoElemento en texto para poder serializarlo
+                        body: JSON.stringify(nuevoElemento),
                         headers: {
                             'Content-Type': 'application/json',
                             }//esto es lo que hace postman, pero lo tengo que hacer a mano
@@ -25,7 +25,7 @@ function saveUsuario(req,res){
     .then( myjson =>{
         //Mi logica de Negocio
         res.json({
-            result: 'Modificacion correcta',
+            result: 'CAMBIAR ESTE MENSAJE',
             coleccion: queColeccion,
             nuevoElemento: myjson.elemento
         });

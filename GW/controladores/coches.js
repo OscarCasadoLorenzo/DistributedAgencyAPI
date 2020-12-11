@@ -64,8 +64,8 @@ function modificarCoche(req,res){
     const queId = req.params.cochesId;
 
     const queColeccion = req.params.colecciones;
-    const queToken = req.params.token;
     const nuevoElemento = req.body;
+    
     fetch (URL,  {
                         method: 'PUT',
                         body: JSON.stringify(nuevoElemento),//Convierte el nuevoElemento en texto para poder serializarlo
@@ -95,6 +95,4 @@ module.exports = {
     getCoches,
     getCoche,
     modificarCoche,
-    //deleteProduct
-
 }

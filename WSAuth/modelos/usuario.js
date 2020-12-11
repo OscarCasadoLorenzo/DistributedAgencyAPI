@@ -6,12 +6,12 @@ const Schema = mongoose.Schema
 
 
 const UserSchema = new Schema({
-    email : { type: String, unique:true, index:true, lowercase: true},
-    nombre : String,
-    apellidos: String,
+    email : { type: String, lowercase: true, require:true},
+    nombre : { type:String, require:true},
+    apellidos: { type:String, require:true},
 
     //De esta forma al hacer un GET no devuelve este atributo
-    password : { type:String, select: false},
+    password : { type:String, select: false, require:true},
     signUpDate: {type: Date, default: Date.now()}
 })
 

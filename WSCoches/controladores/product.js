@@ -1,15 +1,9 @@
 'use strict'
-
-//import Product, { findById, find, findByIdAndUpdate } from './models/product.js.js';
 const Product = require('../modelos/modeloCoche');
 
 
-
-
-
-//Ver todos los productos (app.get ('/api/coches))
 function getProducts(req, res){
-    Product.find({},(err,products)=>{ //{} significa array vacio, es decir todos los productos
+    Product.find({},(err,products)=>{
 
         if(err){
             return res.status(500).send({message:`Error al realizar la peticion ${err}`})
@@ -21,12 +15,9 @@ function getProducts(req, res){
         res.status(200).send({products:products})
         console.log(products)
     })   
-
 }
 
 
-
-//Ver todos los productos (app.get ('/api/coches/:productId))
 function getProduct(req,res){
 
     let productId= req.params.productId;
@@ -38,12 +29,11 @@ function getProduct(req,res){
             return res.status(404).send({message:`El poroducto no existe`})
         }
 
-        res.status(200).send({ product: product})//El segundo "product", es la variable, y el primero es la clave
+        res.status(200).send({ product: product})
     })
 }
 
 
-//Introducir nuevo producto(app.post('/api/coches'))
 function saveProduct(req,res){
 
     let product= new Product();
@@ -62,7 +52,7 @@ function saveProduct(req,res){
 
     
 }
-//Actualizar los datos de un coche (app.put('/api/coches/:productId))
+
 
 function updateProduct(req,res){
 
@@ -79,7 +69,8 @@ function updateProduct(req,res){
     });
 
 }
-//Borrar los datos de un coche (app.delete('/api/coches/:productId))
+
+
 function deleteProduct(req, res){
 
     let productId= req.params.productId;
@@ -106,5 +97,4 @@ module.exports = {
     saveProduct,
     updateProduct,
     deleteProduct
-
 }

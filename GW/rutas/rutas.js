@@ -11,8 +11,6 @@ const usuario = require('../modelos/usuario');
 api.post('/auth/usuarios', usuarios.saveUsuario);
 api.post('/usuarios', usuarios.saveUsuario);
 
-
-
 /*
 api.get('/hotel',hoteles.getHoteles);
 api.get('/hotel/:habitacionId',hoteles.getHabitacionDeHotel); 

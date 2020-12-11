@@ -9,4 +9,6 @@ module.exports= {
     URLWS_Coches: 'http://localhost:3100/api/coches',
 
     URLWS_Auth: 'http://localhost:3400/api/auth',
+
+    transaccionesDB: "mongodb+srv://ocl5:ocl5@api.ajmmk.mongodb.net/transaccionesDB?retryWrites=true&w=majority"
 }

@@ -2,17 +2,18 @@
 
 const express = require('express');
 const api = express.Router();
-const productCtrl = require('../controladores/product')
+const coches = require('../controladores/coches')
 
-api.get('/coches', productCtrl.getProducts);//Mostrar todos los coches
 
-api.get('/coches/:productId',productCtrl.getProduct);//Mostrar solo un coche
+api.get('/coches', coches.getProducts);
 
-api.post('/coches',productCtrl.saveProduct); //Introducir un nuevo coche
+api.get('/coches/:productId',coches.getProduct);
 
-api.put('/coches/:productId',productCtrl.updateProduct);//Modificar un coche
+api.post('/coches',coches.saveProduct);
 
-api.delete('/coches/:productId',productCtrl.deleteProduct); //Borrar un coche
+api.put('/coches/:productId',coches.updateProduct);
+
+api.delete('/coches/:productId',coches.deleteProduct);
 
 
 
