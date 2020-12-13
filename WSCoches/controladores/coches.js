@@ -55,7 +55,7 @@ function saveProduct(req,res){
 
 
 function updateProduct(req,res){
-
+    console.log('Controlador WS')
     let productId = req.params.productId;
 
 

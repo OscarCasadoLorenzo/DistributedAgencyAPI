@@ -53,27 +53,32 @@ function getCoche(req,res){
 
 function alquilarCoche(req,res){
     const queId = req.params.cochesId;
-    const nuevoEstado= req.body.disponible;
-    
-    fetch (`${URL}/${queId}`,  {
-        method: 'PUT',
-        body: JSON.stringify(nuevoEstado),//Convierte el nuevoElemento en texto para poder serializarlo
-    })
+
+    const queColeccion = req.params.colecciones;
+    const queURL= `${URL}/${queId}`;
+    const queToken = req.params.token;
+    const nuevoElemento = req.body;
+    fetch (queURL,  {
+                        method: 'PUT',
+                        body: JSON.stringify(nuevoElemento),//Convierte el nuevoElemento en texto para poder serializarlo
+                        headers: {
+                            'Content-Type': 'application/json',
+                            //'Authoritation':`Bearer${queToken}` 
+                        }//esto es lo que hace postman, pero lo tengo que hacer a mano
+
+                    })
     .then(res => res.json() )
     .then( myjson =>{
         //Mi logica de Negocio
         res.json({
             result: 'Modificacion correcta',
             coleccion: queColeccion,
-            nuevoEstado: myjson.productUp
+            nuevoElemento: myjson.elemento
         });
     })
 
-    //Confirmación a entidad bancaria
+    
 
-
-    //if bien añadir transaccion fecth
-    //if mal volver a llamar fetch modificar disponible
 }
 
 
