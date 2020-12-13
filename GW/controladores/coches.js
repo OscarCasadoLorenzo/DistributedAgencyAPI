@@ -2,11 +2,9 @@
 
 const config    = require('../config.js');
 const fetch     = require ('node-fetch')
-const app       = require('../app.js')
 
 const URL = config.URLWS_Coches;
 
-//Ver todos los productos (app.get ('/api/hoteles))
 function getCoches(req, res,next){
     console.log(URL)
     try {
@@ -34,13 +32,9 @@ function getCoches(req, res,next){
 }
 
 
-
-//Ver todos los productos (app.get ('/api/coches/:productId))
-
 function getCoche(req,res){
     const queId = req.params.cochesId;
 
-    //const queColeccion = req.params.colecciones;
     console.log(URL);
 
     fetch (`${URL}/${queId}`)
@@ -53,9 +47,7 @@ function getCoche(req,res){
             
             elemento: myjson.product
         });
-        
     }) 
-
 }
 
 
@@ -78,10 +70,11 @@ function alquilarCoche(req,res){
     })
 
     //Confirmación a entidad bancaria
+
+
     //if bien añadir transaccion fecth
     //if mal volver a llamar fetch modificar disponible
 }
-
 
 
 module.exports = {

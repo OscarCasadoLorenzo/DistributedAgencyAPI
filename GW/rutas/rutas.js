@@ -3,10 +3,8 @@ const express       = require('express');
 const api           = express.Router();
 
 const coches        = require('../controladores/coches')
-
-const Usuario = require('../modelos/usuario');
 const usuarios      = require('../controladores/usuarios')
-const usuario = require('../modelos/usuario');
+
 
 api.post('/auth/usuarios', usuarios.saveUsuario);
 api.post('/usuarios', usuarios.saveUsuario);
