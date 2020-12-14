@@ -55,20 +55,24 @@ function saveProduct(req,res){
 
 
 function updateProduct(req,res){
+
     console.log('Controlador WS')
     let productId = req.params.productId;
+    const opBool = req.body.disponible ? true : false;
+ 
+
 
 
     var update = {
-        $set:{disponible : `${req.body.disponible}`}
+        $set:{disponible : `${opBool}`}
     };
 
     Product.findByIdAndUpdate( productId, update, (err, productoUp)=>{
-        if(err) res.status(500).send({
+        if(err) res.status(500).json({
             message: `Error al acrtualizar el producto ${err}`
         });
         
-        res.status(200).send({mess: 'Proceso terminado'});
+        res.json({mess: 'Proceso terminado', producto:productoUp});
 
     });
 }
