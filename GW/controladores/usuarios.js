@@ -9,6 +9,7 @@ function getUsuarios(req, res, next){
     const queURL = `${URL}/usuarios`;
 
     console.log(queURL)
+    console.log(req.user)
     try {
         fetch (queURL)
         .then(res => res.json() )

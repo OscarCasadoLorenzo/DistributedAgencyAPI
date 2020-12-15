@@ -21,13 +21,16 @@ function isAuth( req, res, next){
     //Comprobamos si el token es válido
     if(payload.exp <= moment().unix()){
         return res.json({
-            result: 'KO',
             mensaje: "El token ha caducado"
         })
     }
 
-    req.user = payload.sub
+    req.user = {
+        id : payload.sub,
+        token : token
+    }
     next()
+    
 }
 
 module.exports = isAuth

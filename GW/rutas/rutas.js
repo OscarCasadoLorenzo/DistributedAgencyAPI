@@ -9,7 +9,7 @@ const usuarios  = require('../controladores/usuarios');
 const isAuth = require('../middleware/auth');
 
 
-api.get('/auth/usuarios', auth, usuarios.getUsuarios);
+api.get('/auth/usuarios', auth , usuarios.getUsuarios);
 api.post('/auth/usuarios', usuarios.saveUsuario);
 api.post('/auth/tokens', usuarios.getToken);
 
