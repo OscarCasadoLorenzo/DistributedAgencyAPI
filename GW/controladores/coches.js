@@ -53,11 +53,10 @@ function getCoche(req,res){
 
 function alquilarCoche(req,res){
     const queId = req.params.cochesId;
-
-    const queColeccion = req.params.colecciones;
     const queURL= `${URL}/${queId}`;
-    const queToken = req.params.token;
+
     const nuevoElemento = req.body;
+
     fetch (queURL,  {
                         method: 'PUT',
                         body: JSON.stringify(nuevoElemento),//Convierte el nuevoElemento en texto para poder serializarlo
@@ -69,11 +68,8 @@ function alquilarCoche(req,res){
                     })
     .then(res => res.json() )
     .then( myjson =>{
-        //Mi logica de Negocio
         res.json({
-            result: 'Modificacion correcta',
-            coleccion: queColeccion,
-            nuevoElemento: myjson.elemento
+            result: 'Petición finalizada',
         });
     })
 

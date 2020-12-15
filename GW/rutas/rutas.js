@@ -6,8 +6,10 @@ const coches        = require('../controladores/coches')
 const usuarios      = require('../controladores/usuarios')
 
 
+api.get('/auth/usuarios', usuarios.getUsuarios);
 api.post('/auth/usuarios', usuarios.saveUsuario);
-api.post('/usuarios', usuarios.saveUsuario);
+api.post('/auth/tokens', usuarios.getToken);
+
 
 /*
 api.get('/hotel',hoteles.getHoteles);

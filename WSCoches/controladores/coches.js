@@ -55,12 +55,8 @@ function saveProduct(req,res){
 
 
 function updateProduct(req,res){
-
-    console.log('Controlador WS')
     let productId = req.params.productId;
-    const opBool = req.body.disponible ? true : false;
- 
-
+    const opBool = req.body.disponible;
 
 
     var update = {
@@ -72,7 +68,7 @@ function updateProduct(req,res){
             message: `Error al acrtualizar el producto ${err}`
         });
         
-        res.json({mess: 'Proceso terminado', producto:productoUp});
+        res.json({mess: 'Proceso terminado'});
 
     });
 }
@@ -93,8 +89,6 @@ function deleteProduct(req, res){
             res.status(200).send({message: `El producto se ha borrado`});
         })
     });
-
-
 }
 
 
