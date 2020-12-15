@@ -2,8 +2,12 @@
 
 const mongoose  = require('mongoose')
 const Usuario   = require('../modelos/usuario')
-const Bcrypt        = require('bcrypt-nodejs')
-const config    = require('../config')
+
+const Bcrypt    = require('bcrypt-nodejs')
+const token     = require('../servicios/token')
+
+const serv      = require('../servicios/crypto')
+
 
 
 function getToken(req,res){
@@ -17,17 +21,20 @@ function getToken(req,res){
             return res.json({mess: 'Usuario no encontrado'})
         } 
         else{
-            console.log('USuario encontrado')
-            //Comprobamos a ver que tenía la BD
+            console.log('Usuario encontrado')
+
+            //Extraemos el hash de la DB
             let hash = usuario.password
 
-            Bcrypt.compare(password, hash, (err, result) =>{
-                console.log(`Resultado : ${result}`)
-            })
+            if(serv.comparaPassword(password, hash)){
+                console.log('Contraseña correcta')
 
-            //La comparamos con la de la BD
-            console.log(hash)
-            res.json({mess: 'Usuario encontrado'})
+                const t = token.createToken(usuario);
+                res.json({token : t})
+            }
+            else{
+                console.log('Contraseña incorrecta')
+            }      
         }
     });
 }

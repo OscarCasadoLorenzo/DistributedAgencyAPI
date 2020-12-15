@@ -51,9 +51,7 @@ function getToken(req,res){
     .then( myjson =>{
         //Mi logica de Negocio
         res.json({
-            result: 'CAMBIAR ESTE MENSAJE',
-            coleccion: queColeccion,
-            nuevoElemento: myjson.elemento
+            token : myjson.token
         });
     })
 }
