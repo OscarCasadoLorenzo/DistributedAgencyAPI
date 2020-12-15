@@ -1,24 +1,33 @@
 'use strict'
 
-function auth( req, res, next){
+const moment    = require('moment')
+const config    = require('../config')
+const jwt       = require('jwt-simple')
+
+function isAuth( req, res, next){
     if(!req.headers.authorization){
-        res.status(401).json({
+        return res.status(401).json({
             result: 'KO',
-            mensaje: "No hhas enviado el tockenn en la cabecera"
+            mensaje: "No has enviado el tocken en la cabecera"
         })
-        return next();
     }
     
-    const miToken= req.headers.authorization.split(" ")[1] ;
-    console.log(miToken);
+    //Bearer miToken
+    const token = req.headers.authorization.split(" ")[1] ;
+    console.log('El token recibido en middleware es', token);
 
-    if(miToken=== "MITOKEN1234"){//token en formato JWT
-        req.params.token=miToken;
-        return next();
+    const payload = jwt.decode(token, config.SECRET_TOKEN)
+
+    //Comprobamos si el token es válido
+    if(payload.exp <= moment().unix()){
+        return res.json({
+            result: 'KO',
+            mensaje: "El token ha caducado"
+        })
     }
-    res .status(401).json({
-        result: 'KO',
-        mensaje: "Acceso no autorizado a estre servicio"
-    })
-   return next(new Error("Acceso no autorizado a este servicio"));
+
+    req.user = payload.sub
+    next()
 }
+
+module.exports = isAuth

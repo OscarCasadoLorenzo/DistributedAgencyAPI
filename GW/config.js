@@ -10,5 +10,7 @@ module.exports= {
 
     URLWS_Auth: 'http://localhost:3400/api/auth',
 
-    transaccionesDB: "mongodb+srv://ocl5:ocl5@api.ajmmk.mongodb.net/transaccionesDB?retryWrites=true&w=majority"
+    transaccionesDB: "mongodb+srv://ocl5:ocl5@api.ajmmk.mongodb.net/transaccionesDB?retryWrites=true&w=majority",
+
+    SECRET_TOKEN : "mellamooscarcasadolorenzo1234"
 }

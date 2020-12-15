@@ -4,16 +4,14 @@ const Product = require('../modelos/modeloCoche');
 
 function getProducts(req, res){
     Product.find({},(err,products)=>{
-
         if(err){
-            return res.status(500).send({message:`Error al realizar la peticion ${err}`})
+            return res.json({message:`Error al realizar la peticion ${err}`})
         }
         if(!products){
-            return res.status(404).send({message:`No existen productos`})
+            return res.json({message:`No existen productos`})
         }
 
-        res.status(200).send({products:products})
-        console.log(products)
+        res.json({products:products})
     })   
 }
 
@@ -23,13 +21,13 @@ function getProduct(req,res){
     let productId= req.params.productId;
     Product.findById(productId,(err,product)=>{
         if(err){
-            return res.status(500).send({message:`Error al realizar la peticion ${err}`})
+            return res.json({message:`Error al realizar la peticion ${err}`})
         }
         if(!product){
-            return res.status(404).send({message:`El poroducto no existe`})
+            return res.json({message:`El producto no existe`})
         }
 
-        res.status(200).send({ product: product})
+        res.json({ product: product})
     })
 }
 
