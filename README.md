@@ -1,5 +1,4 @@
+Public Postman URL: https://www.getpostman.com/collections/cc30cf94fef9571c8855
+
 //TODO:
-- Terminar y comprobar endpoints coches
-- Modularizar GW
 - Hacer BD de transacciones en el GW
-- Hacer la gestión de usuarios y los tokens
