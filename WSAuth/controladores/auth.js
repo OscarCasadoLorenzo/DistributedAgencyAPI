@@ -1,6 +1,5 @@
 'use strict'
 
-const mongoose  = require('mongoose')
 const Usuario   = require('../modelos/usuario')
 
 const Bcrypt    = require('bcrypt-nodejs')

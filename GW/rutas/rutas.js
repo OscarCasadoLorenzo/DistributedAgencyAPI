@@ -6,7 +6,6 @@ const auth      = require('../middleware/auth')
 
 const coches    = require('../controladores/coches')
 const usuarios  = require('../controladores/usuarios');
-const isAuth = require('../middleware/auth');
 
 
 api.get('/auth/usuarios', auth , usuarios.getUsuarios);
