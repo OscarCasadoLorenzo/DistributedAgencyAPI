@@ -10,33 +10,28 @@ function getUsuarios(req, res, next){
 
     console.log(queURL)
     console.log(req.user)
-    try {
-        fetch (queURL)
-        .then(res => res.json() )
-        .then( myjson =>{
-            //Mi logica de Negocio
-            res.json({
-                result: 'OK',
-                
-                elementos: myjson.usuarios
-            });
+
+    fetch (queURL)
+    .then(res => res.json() )
+    .then( myjson =>{
+        //Mi logica de Negocio
+        res.json({
+            msg: myjson.msg,
             
+            usuarios: myjson.usuarios
+        });
+        
     })
     .catch(error=> {
-        console.log("Error: ", error),
+        res.json({msg: 'El servidor se encuentra desabilitado. Intentelo más tarde.'})
         next()
     })
        
-    } 
-    catch (error) {
-        console.err(error);
-        console.log("a.ldfknas.ldkfasñld");
-    }
+    
 }
 
 
 function getToken(req,res){
-    console.log('controlador login')
     const queColeccion = req.params.colecciones;
     const nuevoElemento = req.body;
     const queURL = `${URL}/tokens`;
@@ -52,15 +47,18 @@ function getToken(req,res){
     .then( myjson =>{
         //Mi logica de Negocio
         res.json({
+            msg: myjson.msg,
             token : myjson.token
         });
+    })
+    .catch(error=> {
+        res.json({msg: 'El servidor se encuentra desabilitado. Intentelo más tarde.'})
+        next()
     })
 }
 
 
 function saveUsuario(req,res){
-
-
     const nuevoElemento = req.body;
     console.log(nuevoElemento)
 
@@ -76,7 +74,14 @@ function saveUsuario(req,res){
     })
     .then(res => res.json() )
     .then( myjson =>{
-        res.json({mess: 'Proceso terminado'})
+        res.json({
+            msg: myjson.msg,
+            //token: myjson.token
+        })
+    })
+    .catch(error=> {
+        res.json({msg: 'El servidor se encuentra desabilitado. Intentelo más tarde.'})
+        next()
     })
 }
 

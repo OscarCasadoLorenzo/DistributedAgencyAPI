@@ -9,22 +9,21 @@ function getCoches(req, res,next){
     console.log(URL) 
     const queToken = req.user.token;
 
-    try {
+
         fetch (URL,  {
             method: 'GET',
-
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization':`Bearer ${queToken}` 
-            }//esto es lo que hace postman, pero lo tengo que hacer a mano
+            }
 
         })
         .then(res => res.json() )
         .then( myjson =>{
             //Mi logica de Negocio
             res.json({
-                result: 'OK1',
-                elementos: myjson.products
+                msg: myjson.msg,
+                productos: myjson.products
             });
             
     })
@@ -32,12 +31,7 @@ function getCoches(req, res,next){
         console.log("Error: ", error),
         next()
     })
-       
-    } 
-    catch (error) {
-        console.log(error);
-        console.log("a.ldfknas.ldkfasñld");
-    }
+
 }
 
 
@@ -51,12 +45,14 @@ function getCoche(req,res){
     .then( myjson =>{
         //Mi logica de Negocio
         res.json({
-            result: 'OK',
-            //coleccion: queColeccion,
-            
-            elemento: myjson.product
+            msg: myjson.msg,
+            producto: myjson.product
         });
     }) 
+    .catch(error=> {
+        res.json({msg: 'El servidor se encuentra desabilitado. Intentelo más tarde.'})
+        next()
+    })
 }
 
 
@@ -80,8 +76,12 @@ function alquilarCoche(req,res){
     .then(res => res.json() )
     .then( myjson =>{
         res.json({
-            result: 'Petición finalizada',
+            msg: myjson.msg
         });
+    })
+    .catch(error=> {
+        res.json({msg: 'El servidor se encuentra desabilitado. Intentelo más tarde.'})
+        next()
     })
 
     

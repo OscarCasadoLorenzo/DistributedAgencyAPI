@@ -1,7 +1,7 @@
 {
   "name": "servicioauth",
   "version": "1.0.0",
-  "description": "Servicio de alquiler de coches",
+  "description": "Servicio de autentificación y registro de usuarios",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",

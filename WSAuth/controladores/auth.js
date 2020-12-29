@@ -13,26 +13,23 @@ function getToken(req,res){
     const password = req.body.password
 
     Usuario.findOne({email: `${req.body.email}`}, (err, usuario) => {
-        if(err) return res.json({mess: 'Error en getToken'})
+        if(err) return res.json({msg: 'Fallo en la conexión a la BD'})
         
         else if(usuario == null){
-            console.log('USuario no encontrado')
-            return res.json({mess: 'Usuario no encontrado'})
+            return res.json({msg : 'Usuario y/o contraseña inválidos' })
         } 
         else{
-            console.log('Usuario encontrado')
-
             //Extraemos el hash de la DB
             let hash = usuario.password
 
             if(serv.comparaPassword(password, hash)){
-                console.log('Contraseña correcta')
-
                 const t = token.createToken(usuario);
-                res.json({token : t})
+                res.json({
+                        msg : 'Loggueo exitoso',
+                        token : t})
             }
             else{
-                console.log('Contraseña incorrecta')
+                res.json({msg : 'Usuario y/o contraseña inválidos' })
             }      
         }
     });
@@ -48,10 +45,10 @@ function saveUsuario(req,res){
 
     Usuario.exists({email:`${req.body.email}`}, (err, doc) => { 
         if (err){ 
-            return res.status(500).send({mess: 'Fallo en la conexión'})
+            return res.json({msg : 'Fallo en la conexión a la BD' })
         }
-        else if(doc){ //Existe el usuario
-            return res.status(500).send({mess: 'El usuario ya existe'})
+        else if(doc){ 
+            return res.json({msg : 'El usuario ya existe' })
         } 
         else{
             usuario.email = req.body.email
@@ -60,7 +57,7 @@ function saveUsuario(req,res){
         
             usuario.save()
         
-            return res.status(201).send({message: 'Usuario creado con éxito'})
+            return res.json({msg : 'Usuario creado con éxito' })
         }
     });      
 }
@@ -70,12 +67,15 @@ function getUsuarios(req, res){
     Usuario.find({},(err,usuarios)=>{
 
         if(err){
-            return res.status(500).send({message:`Error al realizar la peticion ${err}`})
+            return res.json({msg : 'Fallo al conectar con la BD' })
         }
         if(!usuarios){
-            return res.status(404).send({message:`No existen productos`})
+            return res.status(404).send({message:`No existen usuarios en la BD`})
         }
-        res.status(200).send({usuarios:usuarios})
+        res.json({
+            msg : 'Operación realizada con exíto',
+            usuarios:usuarios
+        })
     })   
 }
 

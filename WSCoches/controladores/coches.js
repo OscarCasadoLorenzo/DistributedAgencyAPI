@@ -6,13 +6,14 @@ function getProducts(req, res){
     console.log('12312');
     Product.find({},(err,products)=>{
         if(err){
-            return res.json({message:`Error al realizar la peticion ${err}`})
+            return res.json({msg:`Error al realizar la peticion ${err}`})
         }
         if(!products){
-            return res.json({message:`No existen productos`})
+            return res.json({msg:`No existen coches`})
         }
 
-        res.json({products:products})
+        res.json({msg: 'Operación exitosa',
+                 products:products})
     })   
 }
 
@@ -22,13 +23,14 @@ function getProduct(req,res){
     let productId= req.params.productId;
     Product.findById(productId,(err,product)=>{
         if(err){
-            return res.json({message:`Error al realizar la peticion ${err}`})
+            return res.json({msg:`Error al realizar la peticion ${err}`})
         }
         if(!product){
-            return res.json({message:`El producto no existe`})
+            return res.json({msg:`No existe el coche solicitado`})
         }
 
-        res.json({ product: product})
+        res.json({msg: 'Operación exitosa',
+                  product:product})
     })
 }
 
@@ -44,9 +46,10 @@ function saveProduct(req,res){
     product.description = req.body.description;
 
     product.save((err, productStorage)=>{
-        if(err) res.send(500).send({message:`Error al salvar en la bd ${err}`});
+        if(err) res.send(500).send({msg:`Error al almacenar coche en BD ${err}`});
         
-        res.status(200).send({message: productStorage});
+        res.json({msg: 'Coche almacenado en BD',
+                  product:product})
     });
 
     
@@ -64,10 +67,10 @@ function updateProduct(req,res){
 
     Product.findByIdAndUpdate( productId, update, (err, productoUp)=>{
         if(err) res.status(500).json({
-            message: `Error al acrtualizar el producto ${err}`
+            msg: `Error al actualizar el coche ${err}`
         });
         
-        res.json({mess: 'Proceso terminado'});
+        res.json({msg: 'Actualización exitosa'});
 
     });
 }
@@ -79,14 +82,19 @@ function deleteProduct(req, res){
 
     Product.findById(productId,(err,product)=>{
         if(err){
-            return res.status(500).send({message: `Error al borrar el producto ${err}`});
+            return res.json({msg: `Operación fallida`});
         }
 
-        product.remove(err =>{
-            if(err) res.status(500).send({message: `Error al borrar el producto ${err}`})
-
-            res.status(200).send({message: `El producto se ha borrado`});
-        })
+        try{
+            product.remove(err =>{
+                if(err) res.json({msg: `Error al borrar el coche ${err}`})
+    
+                return res.json({msg: `El coche se ha borrado con éxito`});
+            })
+        }catch(error){
+            return res.json({msg: `El coche solicitado no existe`});
+        }
+        
     });
 }
 
