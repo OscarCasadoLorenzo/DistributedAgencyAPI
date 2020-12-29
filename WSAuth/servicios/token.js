@@ -14,25 +14,11 @@ function createToken( user ){
     return jwt.encode(payload, config.SECRET_TOKEN);
 }
 
-function decodeToken(token){
-    return Promise( (resolve, reject) => {
-        try{
-            const payload = jwt.decode(token, config.SECRET_TOKEN, true);
-            if(payload.exp <= moment().unix()){
-                reject({
-                    status:401,
-                    mess: 'El token ha expirado'
-                });
-            }
-            resolve(payload.sub);
-        } catch(err){
-            reject({
-                status: 500,
-                mess: 'El token no es válido',
-                err:err
-            });
-        }
-    });
+function decodeToken(token){          
+    const payload = jwt.decode(token, config.SECRET_TOKEN, true);
+
+    return payload.sub;
+
 }
 
 module.exports = {

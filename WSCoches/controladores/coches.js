@@ -41,9 +41,7 @@ function saveProduct(req,res){
     
     product.modelo = req.body.modelo;
     product.matricula = req.body.matricula;
-    product.price = req.body.price;
-    product.category = req.body.category;
-    product.description = req.body.description;
+    product.precio = req.body.precio;
 
     product.save((err, productStorage)=>{
         if(err) res.send(500).send({msg:`Error al almacenar coche en BD ${err}`});
@@ -70,7 +68,8 @@ function updateProduct(req,res){
             msg: `Error al actualizar el coche ${err}`
         });
         
-        res.json({msg: 'Actualización exitosa'});
+        res.json({msg: 'Actualización exitosa',
+                  gasto : productoUp.precio});
 
     });
 }

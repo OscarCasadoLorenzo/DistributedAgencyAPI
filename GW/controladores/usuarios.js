@@ -7,11 +7,16 @@ const URL = config.URLWS_Auth;
 
 function getUsuarios(req, res, next){
     const queURL = `${URL}/usuarios`;
+    const queToken = req.user.token;
 
-    console.log(queURL)
-    console.log(req.user)
+    fetch (queURL,  {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization':`Bearer ${queToken}` 
+        }
 
-    fetch (queURL)
+    })
     .then(res => res.json() )
     .then( myjson =>{
         //Mi logica de Negocio
@@ -32,7 +37,6 @@ function getUsuarios(req, res, next){
 
 
 function getToken(req,res){
-    const queColeccion = req.params.colecciones;
     const nuevoElemento = req.body;
     const queURL = `${URL}/tokens`;
 
@@ -53,16 +57,12 @@ function getToken(req,res){
     })
     .catch(error=> {
         res.json({msg: 'El servidor se encuentra desabilitado. Intentelo más tarde.'})
-        next()
     })
 }
 
 
 function saveUsuario(req,res){
     const nuevoElemento = req.body;
-    console.log(nuevoElemento)
-
-
     const queURL = `${URL}/usuarios`;
 
     fetch (queURL,  {
@@ -76,7 +76,6 @@ function saveUsuario(req,res){
     .then( myjson =>{
         res.json({
             msg: myjson.msg,
-            //token: myjson.token
         })
     })
     .catch(error=> {
@@ -84,9 +83,6 @@ function saveUsuario(req,res){
         next()
     })
 }
-
-
-
 
 module.exports = {
     saveUsuario,

@@ -7,7 +7,7 @@ const coches = require('../controladores/coches')
 const auth      = require('../middleware/auth')    
 
 
-api.get('/coches', auth, coches.getProducts);
+api.get('/coches', coches.getProducts);
 
 api.get('/coches/:productId',coches.getProduct);
 

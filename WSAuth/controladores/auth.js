@@ -11,7 +11,7 @@ const serv      = require('../servicios/crypto')
 
 function getToken(req,res){
     const password = req.body.password
-
+    
     Usuario.findOne({email: `${req.body.email}`}, (err, usuario) => {
         if(err) return res.json({msg: 'Fallo en la conexión a la BD'})
         
@@ -19,17 +19,19 @@ function getToken(req,res){
             return res.json({msg : 'Usuario y/o contraseña inválidos' })
         } 
         else{
+            
             //Extraemos el hash de la DB
             let hash = usuario.password
-
             if(serv.comparaPassword(password, hash)){
                 const t = token.createToken(usuario);
-                res.json({
+               
+                return res.json({
                         msg : 'Loggueo exitoso',
                         token : t})
+                        
             }
             else{
-                res.json({msg : 'Usuario y/o contraseña inválidos' })
+                return res.json({msg : 'Usuario y/o contraseña inválidos' })
             }      
         }
     });
@@ -54,6 +56,8 @@ function saveUsuario(req,res){
             usuario.email = req.body.email
             usuario.password = hash
             usuario.apellidos = req.body.apellidos
+            usuario.numTarjeta = req.body.numTarjeta
+            usuario.saldo = req.body.saldo
         
             usuario.save()
         
@@ -79,8 +83,31 @@ function getUsuarios(req, res){
     })   
 }
 
+/*
+function updateUsuario(req,res){
+    var usuarioId = token.decodeToken(req.headers.authorization);
+    console.log(req.body.gasto)
+    const gasto = req.body.gasto;
+
+    var update = {
+        $inc:{saldo : -`${gasto}`}
+    };
+
+
+    Usuario.findByIdAndUpdate( usuarioId, update, (err, usuarioUp)=>{
+        if(err) res.status(500).json({
+            msg: `Error al actualizar el usuario ${err}`
+        });
+        
+        res.json({msg: 'Actualización exitoso'});
+
+    });
+}
+*/
+
 module.exports = {
     saveUsuario,
     getUsuarios,
-    getToken
+    getToken,
+    //updateUsuario
 }

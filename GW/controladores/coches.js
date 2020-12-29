@@ -7,24 +7,15 @@ const URL = config.URLWS_Coches;
 
 function getCoches(req, res,next){
     console.log(URL) 
-    const queToken = req.user.token;
 
-
-        fetch (URL,  {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization':`Bearer ${queToken}` 
-            }
-
-        })
-        .then(res => res.json() )
-        .then( myjson =>{
-            //Mi logica de Negocio
-            res.json({
-                msg: myjson.msg,
-                productos: myjson.products
-            });
+    fetch (URL)
+    .then(res => res.json() )
+    .then( myjson =>{
+        //Mi logica de Negocio
+        res.json({
+            msg: myjson.msg,
+            productos: myjson.products
+        });
             
     })
     .catch(error=> {
@@ -62,30 +53,28 @@ function alquilarCoche(req,res){
 
     const nuevoElemento = req.body;
     const queToken = req.user.token;
-    console.log(queToken);
+
     fetch (queURL,  {
-                        method: 'PUT',
-                        body: JSON.stringify(nuevoElemento),//Convierte el nuevoElemento en texto para poder serializarlo
+        method: 'PUT',
+        body: JSON.stringify(nuevoElemento),
 
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization':`Bearer ${queToken}` 
-                        }//esto es lo que hace postman, pero lo tengo que hacer a mano
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization':`Bearer ${queToken}` 
+        }
 
-                    })
+    })
     .then(res => res.json() )
     .then( myjson =>{
-        res.json({
+        req.json({
             msg: myjson.msg
         });
+        next();
     })
     .catch(error=> {
         res.json({msg: 'El servidor se encuentra desabilitado. Intentelo más tarde.'})
         next()
     })
-
-    
-
 }
 
 

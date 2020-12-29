@@ -6,9 +6,8 @@ const jwt       = require('jwt-simple')
 
 function isAuth( req, res, next){
     if(!req.headers.authorization){
-        return res.status(401).json({
-            result: 'KO',
-            mensaje: "No has enviado el tocken en la cabecera"
+        return res.json({
+            msg: "No has enviado el token en la cabecera"
         })
     }
     
@@ -16,12 +15,13 @@ function isAuth( req, res, next){
     const token = req.headers.authorization.split(" ")[1] ;
     console.log('El token recibido en middleware es', token);
 
-    const payload = jwt.decode(token, config.SECRET_TOKEN)
+    var payload = 0;
 
-    //Comprobamos si el token es válido
-    if(payload.exp <= moment().unix()){
+    try{
+        payload = jwt.decode(token, config.SECRET_TOKEN)
+    }catch(error){
         return res.json({
-            mensaje: "El token ha caducado"
+            msg: "El token ha caducado y/o manipulado"
         })
     }
 
