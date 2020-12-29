@@ -3,6 +3,19 @@ const mongoose = require('mongoose');
 const app = require('./app')
 const config = require('./config')
 
+
+const fs = require('fs');
+const https = require('https');
+
+
+const opciones = {
+    key: fs.readFileSync('./cert/key.pen'),
+    cert: fs.readFileSync('./cert/cert.pen')
+}
+
+  
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 mongoose.connect(config.cochesDB,(err,res)=>{
     useUnifiedTopology:true
     useNewUrlParser:true
@@ -12,9 +25,11 @@ mongoose.connect(config.cochesDB,(err,res)=>{
         //si no esta conectado la bbdd  lanzara error
     }
     console.log('Conexion a la base de datos establecida...');
-    app.listen(config.port, ()=>{
-        //console.log(`API REST corroenmdo en http://localhost:${config.port}`);
-    });
+    https.createServer(opciones, app).listen(config.port);
 })
+
+
+
+
 
 

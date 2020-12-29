@@ -6,7 +6,7 @@ module.exports= {
     
     URLWS_Avion : 'http://localhost:3200/api/aviones',
    
-    URLWS_Coches: 'http://localhost:3100/api/coches',
+    URLWS_Coches: 'https://localhost:3100/api/coches',
 
     URLWS_Auth: 'http://localhost:3400/api/auth',
 
