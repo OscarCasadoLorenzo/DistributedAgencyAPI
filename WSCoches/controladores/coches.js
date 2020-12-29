@@ -3,6 +3,7 @@ const Product = require('../modelos/modeloCoche');
 
 
 function getProducts(req, res){
+    console.log('12312');
     Product.find({},(err,products)=>{
         if(err){
             return res.json({message:`Error al realizar la peticion ${err}`})

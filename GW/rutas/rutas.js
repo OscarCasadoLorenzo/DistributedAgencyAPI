@@ -8,7 +8,7 @@ const coches    = require('../controladores/coches')
 const usuarios  = require('../controladores/usuarios');
 
 
-api.get('/auth/usuarios', auth , usuarios.getUsuarios);
+api.get('/auth/usuarios',usuarios.getUsuarios);
 api.post('/auth/usuarios', usuarios.saveUsuario);
 api.post('/auth/tokens', usuarios.getToken);
 
@@ -19,9 +19,9 @@ api.get('/hotel/:habitacionId',hoteles.getHabitacionDeHotel);
 api.put('/hotel/:habitacionId',hoteles.modificarHoteles);
 */
 
-api.get('/coches',coches.getCoches);
+api.get('/coches',auth, coches.getCoches);
 api.get('/coches/:cochesId',coches.getCoche); 
-api.put('/coches/:cochesId',coches.alquilarCoche);
+api.put('/coches/:cochesId', auth, coches.alquilarCoche);
 
 /*
 api.get('/aviones/',aviones.getVuelos);

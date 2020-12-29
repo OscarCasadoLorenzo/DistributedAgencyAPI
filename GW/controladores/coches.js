@@ -6,15 +6,24 @@ const fetch     = require ('node-fetch')
 const URL = config.URLWS_Coches;
 
 function getCoches(req, res,next){
-    console.log(URL)
+    console.log(URL) 
+    const queToken = req.user.token;
+
     try {
-        fetch (URL)
+        fetch (URL,  {
+            method: 'GET',
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization':`Bearer ${queToken}` 
+            }//esto es lo que hace postman, pero lo tengo que hacer a mano
+
+        })
         .then(res => res.json() )
         .then( myjson =>{
             //Mi logica de Negocio
             res.json({
-                result: 'OK',
-                
+                result: 'OK1',
                 elementos: myjson.products
             });
             
@@ -26,7 +35,7 @@ function getCoches(req, res,next){
        
     } 
     catch (error) {
-        console.err(error);
+        console.log(error);
         console.log("a.ldfknas.ldkfasñld");
     }
 }
@@ -56,13 +65,15 @@ function alquilarCoche(req,res){
     const queURL= `${URL}/${queId}`;
 
     const nuevoElemento = req.body;
-
+    const queToken = req.user.token;
+    console.log(queToken);
     fetch (queURL,  {
                         method: 'PUT',
                         body: JSON.stringify(nuevoElemento),//Convierte el nuevoElemento en texto para poder serializarlo
+
                         headers: {
                             'Content-Type': 'application/json',
-                            //'Authoritation':`Bearer${queToken}` 
+                            'Authorization':`Bearer ${queToken}` 
                         }//esto es lo que hace postman, pero lo tengo que hacer a mano
 
                     })
