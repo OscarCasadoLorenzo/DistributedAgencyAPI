@@ -11,7 +11,7 @@ api.get('/coches', coches.getProducts);
 
 api.get('/coches/:productId',coches.getProduct);
 
-api.post('/coches',coches.saveProduct);
+api.post('/coches',auth, coches.saveProduct);
 
 api.put('/coches/:productId', coches.updateProduct);
 

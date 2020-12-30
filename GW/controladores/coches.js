@@ -84,7 +84,8 @@ function saveCoche(req,res){
     fetch (queURL,  {
         method: 'POST',
         headers: {
-            'Content-Type':'application/json'
+            'Content-Type':'application/json',
+            'Authorization':`Bearer ${queToken}`
         },
         body: JSON.stringify(nuevoElemento),
     })

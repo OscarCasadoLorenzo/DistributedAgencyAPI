@@ -1,6 +1,5 @@
 'use strict'
 
-const moment    = require('moment')
 const config    = require('../config')
 const jwt       = require('jwt-simple')
 

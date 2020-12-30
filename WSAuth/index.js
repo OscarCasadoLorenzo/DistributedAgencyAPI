@@ -14,6 +14,7 @@ const opciones = {
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
+mongoose.set('useFindAndModify', false)
 mongoose.set('useCreateIndex', true)
 mongoose.set('useUnifiedTopology', true)
 mongoose.set('useNewUrlParser', true)
