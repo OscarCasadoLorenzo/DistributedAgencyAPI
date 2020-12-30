@@ -1,1 +1,1 @@
-Public Postman URL: https://www.getpostman.com/collections/cc30cf94fef9571c8855
+Public Postman URL: https://www.getpostman.com/collections/6f4fc231c8d02aa17da4
