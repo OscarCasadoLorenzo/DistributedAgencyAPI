@@ -13,7 +13,6 @@ function isAuth( req, res, next){
     
     //Bearer miToken
     const token = req.headers.authorization.split(" ")[1] ;
-    console.log('El token recibido en middleware es', token);
 
     try{
         const payload = jwt.decode(token, config.SECRET_TOKEN)
@@ -22,8 +21,6 @@ function isAuth( req, res, next){
             msg: "El token ha caducado y/o manipulado"
         })
     }
-
-
 
     req.user = {
         id : payload.sub,

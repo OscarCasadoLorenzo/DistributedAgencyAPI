@@ -13,7 +13,6 @@ function isAuth( req, res, next){
     
     //Bearer miToken
     const token = req.headers.authorization.split(" ")[1] ;
-    console.log('El token recibido en middleware es', token);
 
     var payload = 0;
 

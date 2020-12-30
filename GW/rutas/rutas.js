@@ -19,8 +19,11 @@ api.put('/hotel/:habitacionId',hoteles.modificarHoteles);
 */
 
 api.get('/coches',coches.getCoches);
+api.post('/coches',coches.saveCoche);
+
 api.get('/coches/:cochesId',coches.getCoche); 
 api.put('/coches/:cochesId', auth, coches.alquilarCoche);
+
 
 /*
 api.get('/aviones/',aviones.getVuelos);

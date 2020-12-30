@@ -16,16 +16,21 @@ const opciones = {
   
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
+mongoose.set('useCreateIndex', true)
+mongoose.set('useUnifiedTopology', true)
+mongoose.set('useNewUrlParser', true)
+
 mongoose.connect(config.cochesDB,(err,res)=>{
-    useUnifiedTopology:true
-    useNewUrlParser:true
-    
+
     if(err){
-         return console.log(`Error al conectar al conectar a la base de datos: ${err}`)
-        //si no esta conectado la bbdd  lanzara error
+         return console.log(`Error al conectar al conectar a la base de datos`)
     }
-    console.log('Conexion a la base de datos establecida...');
-    https.createServer(opciones, app).listen(config.port);
+    console.log('Conexion a la base de datos  de coches establecida...');
+
+    console.log(`WS Coches escuchando en https://localhost:3100/api/coches`);
+    https.createServer(opciones, app).listen(config.port, () =>{
+        
+    }) ;
 })
 
 

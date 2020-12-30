@@ -65,11 +65,34 @@ function alquilarCoche(req,res){
 
     })
     .then(res => res.json() )
-    .then( myjson =>{
-        req.json({
+    .then( myjson =>{ 
+        res.json({
             msg: myjson.msg
         });
         next();
+    })
+    .catch(error=> {
+        res.json({msg: 'El servidor se encuentra desabilitado. Intentelo más tarde.'})
+        next()
+    })
+}
+
+function saveCoche(req,res){
+    const nuevoElemento = req.body;
+    const queURL= `${URL}`;
+
+    fetch (queURL,  {
+        method: 'POST',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(nuevoElemento),
+    })
+    .then(res => res.json() )
+    .then( myjson =>{
+        res.json({
+            msg: myjson.msg,
+        })
     })
     .catch(error=> {
         res.json({msg: 'El servidor se encuentra desabilitado. Intentelo más tarde.'})
@@ -82,4 +105,5 @@ module.exports = {
     getCoches,
     getCoche,
     alquilarCoche,
+    saveCoche
 }

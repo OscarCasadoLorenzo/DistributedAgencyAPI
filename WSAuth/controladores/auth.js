@@ -38,7 +38,6 @@ function getToken(req,res){
 }
 
 function saveUsuario(req,res){
-
     var salt = Bcrypt.genSaltSync(10)
 
     let hash = Bcrypt.hashSync(req.body.password, salt)

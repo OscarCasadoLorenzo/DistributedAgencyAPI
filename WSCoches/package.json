@@ -4,7 +4,7 @@
   "description": "Servicio de alquiler de coches",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon index.js --no-deprecation",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

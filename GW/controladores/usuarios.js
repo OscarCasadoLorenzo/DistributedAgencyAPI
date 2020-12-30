@@ -36,7 +36,7 @@ function getUsuarios(req, res, next){
 }
 
 
-function getToken(req,res){
+function getToken(req,res, next){
     const nuevoElemento = req.body;
     const queURL = `${URL}/tokens`;
 
@@ -57,11 +57,12 @@ function getToken(req,res){
     })
     .catch(error=> {
         res.json({msg: 'El servidor se encuentra desabilitado. Intentelo más tarde.'})
+        next()
     })
 }
 
 
-function saveUsuario(req,res){
+function saveUsuario(req,res, next){
     const nuevoElemento = req.body;
     const queURL = `${URL}/usuarios`;
 
@@ -75,11 +76,11 @@ function saveUsuario(req,res){
     .then(res => res.json() )
     .then( myjson =>{
         res.json({
-            msg: myjson.msg,
+            msg: myjson.msg
         })
     })
     .catch(error=> {
-        res.json({msg: 'El servidor se encuentra desabilitado. Intentelo más tarde.'})
+        res.json({msg: `El servidor se encuentra desabilitado. Intentelo más tarde. ${error}`})
         next()
     })
 }
