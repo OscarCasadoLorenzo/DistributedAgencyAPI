@@ -19,7 +19,7 @@ function getCoches(req, res,next){
             
     })
     .catch(error=> {
-        console.log("Error: ", error),
+        res.json({msg: 'El servidor se encuentra desabilitado. Intentelo más tarde.'})
         next()
     })
 
