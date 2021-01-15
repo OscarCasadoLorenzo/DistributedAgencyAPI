@@ -80,6 +80,7 @@ function alquilarCoche(req,res){
 function saveCoche(req,res){
     const nuevoElemento = req.body;
     const queURL= `${URL}`;
+    const queToken = req.user.token;
 
     fetch (queURL,  {
         method: 'POST',

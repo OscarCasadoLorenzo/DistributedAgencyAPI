@@ -14,8 +14,10 @@ function isAuth( req, res, next){
     //Bearer miToken
     const token = req.headers.authorization.split(" ")[1] ;
 
+    var payload = 0;
+
     try{
-        const payload = jwt.decode(token, config.SECRET_TOKEN)
+        payload = jwt.decode(token, config.SECRET_TOKEN)
     }catch(error){
         return res.json({
             msg: "El token ha caducado y/o manipulado"
